@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
+from .form import ContactForm
 
 POSTS = [
     {"id": 1, "title": "Первый пост"},
@@ -10,11 +11,21 @@ POSTS = [
 
 
 def home(request):
-    return HttpResponse("Это главная страница")
+    posts = [
+        {"author": "Python", "published": True},
+        {"title": "Django", "published": True},
+    ]
+
+    context = {
+        "page_title": "Мой блог",
+        "posts": posts,
+    }
+
+    return render(request, "blog/home.html", context)
 
 
 def contacts(request):
-    return HttpResponse("Это rf страница")
+    return HttpResponse("Это contacts страница")
 
 def news(request):
     return HttpResponse("Это news страница")
@@ -39,3 +50,26 @@ class AboutView(View):
 class ServicesViews(View):
     def get(self, request):
         return HttpResponse("Это страница services")    
+    
+
+
+
+def contact_view(request):
+    success_message = ""
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():  
+            success_message = "Форма отправлена"
+            form = ContactForm()
+
+    else:
+        form = ContactForm()
+
+    
+    return render(
+        request,
+        "blog/contact.html",
+        {"form": form, "success_message": success_message},
+    )
+            
