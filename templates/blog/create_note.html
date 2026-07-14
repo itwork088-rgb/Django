@@ -1,0 +1,7 @@
+<h1>Новая заметка</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="text">
+    <button type="submit">Сохранить</button>
+</form>

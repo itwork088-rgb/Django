@@ -1,0 +1,10 @@
+<h1>Поиск задач</h1>
+
+<form method="get" action="{% url 'searching' %}">
+    <input type="text" name="q" value="{{ q }}">
+    <button type="submit">Найти</button>
+</form>
+
+{% for task in results %}
+    <p>{{ task.title }}</p>
+{% endfor %}

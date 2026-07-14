@@ -1,0 +1,17 @@
+<h1>Создание своего персонажа</h1>
+
+<form action="{% url 'reg' %}" method="post">
+    {% csrf_token %}
+    {{ characters.as_p }}
+    <button type="submit">Создать своего персонажа</button>
+</form>
+
+<div>
+    {% for char in allChar %}
+        <h1>{{ char.name }}</h1>
+        <p>HP: {{ char.hp }}</p>
+        <p>Скорость: {{ char.speed }}</p>
+    {% empty %}
+        <p>Персонажи еще не созданы.</p>
+    {% endfor %}
+</div>

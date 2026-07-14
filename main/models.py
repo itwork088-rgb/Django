@@ -43,7 +43,33 @@ class State(models.Model):
 class Character(models.Model):
     avatar = models.ImageField(upload_to=("media/user/avatar"))
     name = models.CharField(max_length=50)
-    state = models.OneToOneField(State, on_delete=models.CASCADE)
+    hp = models.IntegerField(default=True, verbose_name="Здоровье")
+    speed = models.IntegerField(default=True, verbose_name="Скорость")
+
+    def __str__(self):
+        return self.name
+
+
+from django.db import models
+
+
+class Pot(models.Model):
+    title = models.CharField(max_length=100)
+    category = models.CharField(max_length=50)
+    is_published = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=50)
+    grade = models.IntegerField()
+    age = models.IntegerField()
+    profession = models.CharField(max_length=50)
+    in_study = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
