@@ -1,12 +1,11 @@
 from django.contrib import admin
-from .models import Post, Comment, Book, Author, State, Character, Student
+from .models import Book, Author, State, Character, Student, Post
 
-admin.site.register(Post)
-admin.site.register(Comment)
 admin.site.register(Book)
 admin.site.register(Author)
 admin.site.register(State)
 admin.site.register(Character)
+admin.site.register(Post)
 
 from django.contrib import admin
 from .models import Pot
@@ -19,6 +18,7 @@ class PotAdmin(admin.ModelAdmin):
     search_fields = ("name",)
     ordering = ("-created_at",)
     readonly_fields = ("created_at",)
+
 
 
 

@@ -1,22 +1,5 @@
 from django.db import models
 
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    views = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
-
-
-class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    text = models.TextField()
-    
-
-
-
-
 
 class Book(models.Model):
     title = models.CharField(max_length=50)
@@ -73,3 +56,44 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+   
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
+    text = models.TextField()
+    in_stock = models.TextField()
+
+    def __str__(self):
+        return self.text
+
+    
+class Api(models.Model):
+    title = models.CharField(max_length=50)
+    text = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+class detail(models.Model):
+    post = models.ForeignKey(
+        Api,
+        on_delete=models.CASCADE,
+        related_name="Text"
+    )
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+
+
